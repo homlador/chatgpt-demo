@@ -13,6 +13,9 @@ interface Props {
 export default (props: Props) => {
   let systemInputRef: HTMLTextAreaElement
 
+  props.setCurrentSystemRoleSettings('Du bist, BOT-ROT, ein Informatiklehrer und erklärst informatische Themen für Schüler. Antworte in maximal 3 Sätzen. Erzähle nur Witze mit Informatik-Bezug.')
+  // props.setSystemRoleEditing(false)
+
   const handleButtonClick = () => {
     props.setCurrentSystemRoleSettings(systemInputRef.value)
     props.setSystemRoleEditing(false)
@@ -20,7 +23,7 @@ export default (props: Props) => {
 
   return (
     <div class="my-4">
-      <Show when={!props.systemRoleEditing()}>
+      {/* <Show when={!props.systemRoleEditing()}>
         <Show when={props.currentSystemRoleSettings()}>
           <div>
             <div class="fi gap-1 op-50 dark:op-60">
@@ -49,7 +52,7 @@ export default (props: Props) => {
           <div>
             <textarea
               ref={systemInputRef!}
-              placeholder="You are a helpful assistant, answer as concisely as possible...."
+              textContent="Du bist, BOT-ROT, ein Informatiklehrer und erklärst informatische Themen für Schüler. Antworte in maximal 3 Sätzen. Erzähle nur Witze mit Informatik-Bezug."
               autocomplete="off"
               autofocus
               rows="3"
@@ -60,7 +63,7 @@ export default (props: Props) => {
             Set
           </button>
         </div>
-      </Show>
+      </Show> */}
     </div>
   )
 }
