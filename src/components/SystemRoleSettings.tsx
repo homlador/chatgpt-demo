@@ -8,13 +8,12 @@ interface Props {
   setSystemRoleEditing: Setter<boolean>
   currentSystemRoleSettings: Accessor<string>
   setCurrentSystemRoleSettings: Setter<string>
+  // defaultSystemRoleSettings: Accessor<string>
+  // setDefaultSystemRoleSettings: Setter<string>
 }
 
 export default (props: Props) => {
   let systemInputRef: HTMLTextAreaElement
-
-  props.setCurrentSystemRoleSettings('Du bist, BOT-ROT, ein Informatiklehrer und erklärst informatische Themen für Schüler. Antworte in maximal 3 Sätzen. Erzähle nur Witze mit Informatik-Bezug.')
-  // props.setSystemRoleEditing(false)
 
   const handleButtonClick = () => {
     props.setCurrentSystemRoleSettings(systemInputRef.value)
@@ -23,16 +22,16 @@ export default (props: Props) => {
 
   return (
     <div class="my-4">
-      {/* <Show when={!props.systemRoleEditing()}>
+      <Show when={!props.systemRoleEditing()}>
         <Show when={props.currentSystemRoleSettings()}>
           <div>
             <div class="fi gap-1 op-50 dark:op-60">
               <IconEnv />
               <span>System Role:</span>
             </div>
-            <div class="mt-1">
+            <pre class="mt-1">
               { props.currentSystemRoleSettings() }
-            </div>
+            </pre>
           </div>
         </Show>
         <Show when={!props.currentSystemRoleSettings() && props.canEdit()}>
@@ -48,11 +47,11 @@ export default (props: Props) => {
             <IconEnv />
             <span>System Role:</span>
           </div>
-          <p class="my-2 leading-normal text-sm op-50 dark:op-60">Gently instruct the assistant and set the behavior of the assistant.</p>
+          <p class="my-2 leading-normal text-sm op-50 dark:op-60">Die Instruktionen für das Sprachmodell</p>
           <div>
             <textarea
               ref={systemInputRef!}
-              textContent="Du bist, BOT-ROT, ein Informatiklehrer und erklärst informatische Themen für Schüler. Antworte in maximal 3 Sätzen. Erzähle nur Witze mit Informatik-Bezug."
+              placeholder="Gib dem Bot eine Anweisung wer er ist und wie er sich verhalten soll."
               autocomplete="off"
               autofocus
               rows="3"
@@ -63,7 +62,7 @@ export default (props: Props) => {
             Set
           </button>
         </div>
-      </Show> */}
+      </Show>
     </div>
   )
 }

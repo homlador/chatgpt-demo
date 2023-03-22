@@ -9,7 +9,8 @@ import type { ChatMessage, ErrorMessage } from '@/types'
 
 export default () => {
   let inputRef: HTMLTextAreaElement
-  const [currentSystemRoleSettings, setCurrentSystemRoleSettings] = createSignal('')
+
+  const [currentSystemRoleSettings, setCurrentSystemRoleSettings] = createSignal(import.meta.env.PUBLIC_SYSTEM_ROLE)
   const [systemRoleEditing, setSystemRoleEditing] = createSignal(false)
   const [messageList, setMessageList] = createSignal<ChatMessage[]>([])
   const [currentError, setCurrentError] = createSignal<ErrorMessage>()
@@ -22,8 +23,11 @@ export default () => {
       if (localStorage.getItem('messageList'))
         setMessageList(JSON.parse(localStorage.getItem('messageList')))
 
-      if (localStorage.getItem('systemRoleSettings'))
-        setCurrentSystemRoleSettings(localStorage.getItem('systemRoleSettings'))
+      // if (localStorage.getItem('systemRoleSettings')) {
+      //   if (localStorage.getItem('systemRoleSettings') === 'undefined')
+      //     setCurrentSystemRoleSettings(import.meta.env.PUBLIC_SYSTEM_ROLE)
+      //   else setCurrentSystemRoleSettings(localStorage.getItem('systemRoleSettings'))
+      // }
     } catch (err) {
       console.error(err)
     }
@@ -149,7 +153,7 @@ export default () => {
     inputRef.style.height = 'auto'
     setMessageList([])
     setCurrentAssistantMessage('')
-    setCurrentSystemRoleSettings('')
+    // setCurrentSystemRoleSettings('')
   }
 
   const stopStreamFetch = () => {
@@ -179,13 +183,17 @@ export default () => {
 
   return (
     <div my-6>
-      <SystemRoleSettings
+      <pre>
+        {import.meta.env.PUBLIC_TASK}
+      </pre>
+
+      {/* <SystemRoleSettings
         canEdit={() => messageList().length === 0}
         systemRoleEditing={systemRoleEditing}
         setSystemRoleEditing={setSystemRoleEditing}
         currentSystemRoleSettings={currentSystemRoleSettings}
         setCurrentSystemRoleSettings={setCurrentSystemRoleSettings}
-      />
+      /> */}
       <Index each={messageList()}>
         {(message, index) => (
           <MessageItem
@@ -207,7 +215,7 @@ export default () => {
         when={!loading()}
         fallback={() => (
           <div class="gen-cb-wrapper">
-            <span>Die Maschine würfelt Worte...</span>
+            <span>Überprüfe Antwort...</span>
             <div class="gen-cb-stop" onClick={stopStreamFetch}>Stop</div>
           </div>
         )}
@@ -217,7 +225,7 @@ export default () => {
             ref={inputRef!}
             disabled={systemRoleEditing()}
             onKeyDown={handleKeydown}
-            placeholder="Gib deine Frage ein..."
+            placeholder="Gib deine Antwort ein..."
             autocomplete="off"
             autofocus
             onInput={() => {
