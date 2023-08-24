@@ -13,7 +13,7 @@ interface Props {
 export default (props: Props) => {
   let systemInputRef: HTMLTextAreaElement
 
-  props.setCurrentSystemRoleSettings('Du bist, BOT-ROT, ein Informatiklehrer und erklärst informatische Themen für Schüler. Antworte in maximal 3 Sätzen. Erzähle nur Witze mit Informatik-Bezug.')
+  props.setCurrentSystemRoleSettings('Du bist, THGBot, ein Sprachmodell für Lernende und Lehrende.')
   // props.setSystemRoleEditing(false)
 
   const handleButtonClick = () => {
@@ -52,7 +52,7 @@ export default (props: Props) => {
           <div>
             <textarea
               ref={systemInputRef!}
-              textContent="Du bist, BOT-ROT, ein Informatiklehrer und erklärst informatische Themen für Schüler. Antworte in maximal 3 Sätzen. Erzähle nur Witze mit Informatik-Bezug."
+              textContent="Du bist, THGBot, ein Sprachmodell für Lernende und Lehrende."
               autocomplete="off"
               autofocus
               rows="3"
